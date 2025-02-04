@@ -1,0 +1,178 @@
+body {
+    width: 100vw;
+    height: 100vh;
+    font-family: Arial, sans-serif;
+    background-color: white;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: baseline;
+}
+/************************ Front Page CSS ************************/
+.user-details-section,
+.category-section {
+    margin-bottom: 20px;
+}
+
+.user-details-section p+input {
+    width: 400px;
+    height: 35px;
+    padding-left: 10px;
+    border: 1px solid #afafaf;
+    /* box-shadow: 0px 0px 5px 4px #ccc; */
+    border-radius: 5px;
+}
+
+.user-details-section input+button {
+    width: 80px;
+    /* height: 35px; */
+    background-color: rgb(24, 184, 196);
+    color: white;
+    border-radius: 5px;
+    border: 1px solid rgb(24, 184, 196);
+}
+
+
+.category-section {
+    width: 600px;
+    text-align: center;
+    /* background-color: aqua; */
+    margin: 10px auto;
+}
+
+.category-section>button {
+    height: 50px;
+    width: 200px;
+    border-radius: 50px;
+    background-color: #EBF9FF;
+    color: #2a2929;
+    font-size: 14px;
+}
+
+.category-section>button:hover {
+    background-color: rgb(24, 184, 196);
+    color: white;
+}
+
+.category-section>button:focus {
+    background-color: rgb(24, 184, 196);
+    color: white;
+}
+
+.logo {
+    width: 100px;
+}
+
+button {
+    width: 150px;
+    padding: 10px 20px;
+    margin: 10px;
+    font-size: 16px;
+    color: white;
+    background-color: rgb(24, 184, 196);
+    border-radius: 10px;
+    cursor: pointer;
+    border: 3px solid rgb(24, 184, 196);
+}
+/************************ Quiz Page CSS  ************************/
+.quiz-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.page {
+    display: none;
+    padding: 20px;
+}
+
+#home-page,
+#quiz-page,
+#result-page {
+    display: none;
+    width: 600px;
+    margin: auto auto;
+    box-shadow: 0px 0px 5px 4px #ccc;
+    border-radius: 10px;
+    text-align: center;
+}
+
+#home-page {
+    width: 600px;
+    margin: auto auto;
+    box-shadow: 0px 0px 5px 4px #ccc;
+    border-radius: 10px;
+    text-align: center;
+}
+
+#question-container h2 {
+    margin-bottom: 50px;
+    margin-left: 10px;
+}
+
+#question-container h2+p {
+    width: fit-content;
+    text-align: center;
+    left: 48%;
+    top: 22.5%;
+    background-color: white;
+    margin-top: 35px;
+    padding: 10px;
+    position: absolute;
+    font-size: 18px;
+    border-radius: 50%;
+    font-weight: bold;
+    color: rgb(24, 184, 196);
+    border: 4px solid rgb(24, 184, 196);
+}
+
+#question-container p+p {
+    /* background-color: #696868; */
+    width: 480px;
+    height: 50px;
+    margin: 35px auto;
+    border: 3px solid #696868;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50px;
+    padding: 30px 30px;
+    margin-top: 0px;
+}
+
+
+#options-container {
+    margin: auto;
+    display: grid;
+    /* background-color: #ccc; */
+    grid-template-columns: 200px 200px;
+    grid-template-rows: 90px 90px;
+    gap: 10px;
+    justify-content: space-around;
+    width: 540px;
+}
+/************************ Quiz Option Button CSS ************************/
+.button-item {
+    /* padding: 20px; */
+    width: 200px;
+    text-align: center;
+    background-color: #EBF9FF;
+    color: #2a2929;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    border: 3px solid rgb(24, 184, 196);
+    font-size: 14px;
+}
+
+.button-item:hover {
+    background-color: rgb(24, 184, 196);
+    color: white;
+}
+/************************ Result Page CSS ************************/
+#result-page p {
+    font-size: 18px;
+    margin: 5px 0;
+}
