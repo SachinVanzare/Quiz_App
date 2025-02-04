@@ -315,14 +315,15 @@ function startTimer() {
 function endQuiz() {
     clearInterval(timer);
     showPage('result-page');
+    document.getElementById('qr').getElementsByTagName('span') =`${category}`;
     document.getElementById('result-username').innerHTML = `<b>${userName}</b> Your Result is:`;
     document.getElementById('total-time').textContent = totalTime;
+    totalTime=0;
     document.getElementById('total-questions').textContent = questions.length;
     document.getElementById('attempted').textContent = questions.length;
     document.getElementById('correct').textContent = score;
     document.getElementById('wrong').textContent = questions.length - score;
     document.getElementById('percentage').textContent = ((score / questions.length) * 100).toFixed(2);
-    totalTime=0;
 }
 
 function startAgain() {
