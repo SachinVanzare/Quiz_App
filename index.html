@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz App</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <!-- Home Page -->
+    <div id="home-page" class="page">
+        <div class="user-details-section">
+            <img src="./Testbook_Logo.jpeg" height="100" width="100" alt="Logo" class="logo">
+            <h1 style="color: rgb(24, 184, 196); margin-top: -5px;">Hello User!</h1>
+            <p style="margin-top: -10px;"><b>Enter your name to continue the Quiz.</b></p>
+            <input type="text" id="username" placeholder="ENTER YOUR NAME...">
+            <!-- <button onclick="startQuiz()">Enter</button> -->
+            <p style="color: #696868; padding-left:60px; padding-right:60px;">You'll have 100 seconds to answer all questions means 10 seconds for each question.</p>
+            <hr>
+        </div>
+        <div class="category-section">
+            <h2>Select Category</h2>
+            <button onclick="selectCategory('HTML')">HTML</button>
+            <button onclick="selectCategory('CSS')">CSS</button>
+            <button onclick="selectCategory('JavaScript')">JAVASCRIPT</button>
+            <button onclick="selectCategory('Data Structures')">DATA STRUCTURE</button>
+        </div>
+        <button onclick="startQuiz()">Enter Quiz</button>
+    </div>
+
+    <!-- Quiz Page -->
+    <div id="quiz-page" class="page">
+        <div class="quiz-header">
+            <div id="timer">Timer: 100 second</div>
+            <div id="score">Score: 0</div>
+        </div>
+        <div id="question-container">
+            <h2 id="category-title"></h2>
+            <p id="question-number">1/10</p>
+            <p id="question-text"></p>
+            <div id="options-container"></div>
+            <button onclick="nextQuestion()">Next Question</button>
+        </div>
+    </div>
+
+    <!-- Result Page -->
+    <div id="result-page" class="page">
+        <h2 style="color: rgb(24, 184, 196)">Quiz Result For </h2>
+        <p id="result-username"></p>
+        <p>Total Time Taken: <b><span id="total-time"></span> seconds</b></p>
+        <p>Total Questions: <b><span id="total-questions"></span></b></p>
+        <p>Attempted : <b><span id="attempted"></span></b></p>
+        <p>Correct : <b><span id="correct"></span></b></p>
+        <p>Wrong : <b><span id="wrong"></span></b></p>
+        <p>Score : <b><span id="percentage"></span>%</b></p>
+        <button onclick="startAgain()">Start Again</button>
+        <button onclick="goToHome()">Go To Home</button>
+    </div>
+
+    <script src="./script.js"></script>
+</body>
+</html>
