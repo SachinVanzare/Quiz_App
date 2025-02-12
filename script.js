@@ -9,6 +9,8 @@ let currentQuestionIndex = 0;
 let score = 0;
 let totalTime = 0;
 let timer;
+
+
 // all quiz questions , options & answer.
 const questionsData = {
     'HTML': [
@@ -149,7 +151,7 @@ const questionsData = {
             answer: 3
         },
         {
-            question:'How can a datatype be declared to be a constant type?',
+            question: 'How can a datatype be declared to be a constant type?',
             options: ['let', 'var', 'const', 'constant'],
             answer: 2
         },
@@ -170,7 +172,7 @@ const questionsData = {
         },
     ],
 
-    'Data Structures': [
+    'Data Structure': [
         {
             question: 'What is a data structure?',
             options: ['A programming language', 'A collection of algorithms', 'A way to store and organize data', 'A type of computer hardware'],
@@ -193,7 +195,7 @@ const questionsData = {
         },
         {
             question: 'Which data structure is needed to convert infix notation to postfix notation?',
-            options: ['Tree', 'Branch', 'Stack','Queue'],
+            options: ['Tree', 'Branch', 'Stack', 'Queue'],
             answer: 2
         },
         {
@@ -223,44 +225,59 @@ const questionsData = {
         },
     ]
 };
+
+
 // call this function when we call home page or quiz page or result page.
 function showPage(pageId) {
     document.querySelectorAll('.page').forEach(page => page.style.display = 'none');
     document.getElementById(pageId).style.display = 'block';
 }
-if(selectedCategory = NULL)
-    {
-        alert('Please Select Category');
-    }
+
+
 // call this function at beginning
 function startQuiz() {
-    // if(selectedCategory = NULL)
-    //     {
-    //         alert('Please Select Category');
-    //     }
     userName = document.getElementById('username').value;
     if (userName.trim() === '') {
         alert('Please Enter Your Name');
         return;
     }
+    if (selectedCategory === '') {
+        alert('Please Select Category');
+        return;
+    }
     showPage('quiz-page');
+    shuffleQuestions(questions);
     startTimer();
     loadQuestion();
-    // if(selectedCategory = '')
-    // {
-    //     alert('Please Select Category');
-    // }
 }
+
+
+// function to shuffle both questions and their options:
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+}
+
+function shuffleQuestions(questionsArray) {
+    shuffleArray(questionsArray);
+    // questionsArray.forEach(question => {
+    //     shuffleArray(question.options);
+    // });
+}
+
+
 // this function for selecting category like HTML,CSS,JS & DSA
 function selectCategory(category) {
     selectedCategory = category;
     questions = questionsData[category];
     currentQuestionIndex = 0;
-    score = 0;
     document.getElementById('category-title').textContent = category;
-    let Score=document.getElementById('score').textContent='Score: '+score;
-    selectedCategory = '';
+    // selectedCategory = '';
 }
+
+
 // this function for showing questions
 function loadQuestion() {
     if (currentQuestionIndex >= questions.length) {
@@ -282,47 +299,123 @@ function loadQuestion() {
         optionsContainer.appendChild(button);
     });
 }
+
+
 // this function for next questions button
 function nextQuestion() {
     currentQuestionIndex++;
     loadQuestion();
 }
+
+
 // this function for checking answers of quiz
-function checkAnswer(selectedIndex) {
+let notAttemptedQuestions = 0;
+function checkAnswer(selectedIndex,correctOptionIndex) {
+    recordQuestionTime();
     const question = questions[currentQuestionIndex];
-    if (selectedIndex === question.answer) {
+    const buttons = document.querySelectorAll('#options-container button');
+
+    buttons.forEach((button, index) => {
+        button.disabled = true;
+        if (index === question.answer) {
+            button.style.backgroundColor = 'green';
+        } else if (index === selectedIndex) {
+            button.style.backgroundColor = 'red';
+        }
+    });
+
+    if (selectedIndex === '') {
+        ++notAttemptedQuestions;
+    } else if (selectedIndex === question.answer) {
         score++;
     }
-    let Score=document.getElementById('score').textContent='Score: '+score;
-    currentQuestionIndex++;
-    loadQuestion();
-}
-// this function for setting a timer
-function startTimer() {
-    let timeLeft = 100;
-    timer = setInterval(() => {
-        document.getElementById('timer').textContent = 'Timer: '+timeLeft+' second';
-        if (timeLeft <= 0) {
-            clearInterval(timer);
+    if (selectedIndex === correctOptionIndex) {
+        score++;
+    }
+
+    setTimeout(() => {
+        currentQuestionIndex++;
+        if (currentQuestionIndex < questions.length) {
+            loadQuestion();
+            startTimer();
+        } else {
             endQuiz();
-            // nextQuestion();
         }
-        timeLeft--;
-        totalTime++;
     }, 1000);
 }
+
+// function checkAnswer(selectedIndex) {
+//     const question = questions[currentQuestionIndex];
+//     if (selectedIndex === question.answer) {
+//         score++;
+//     }
+//     let Score=document.getElementById('score').textContent='Score: '+score;
+//     currentQuestionIndex++;
+//     loadQuestion();
+// }
+
+
+// this function for setting a timer
+let questionStartTime = 0;
+let totalTimeTaken = 0;
+
+function startTimer() {
+    let timeLeft = 10;
+    questionStartTime=Date.now(); // Start timing the question
+
+    document.getElementById('timer').textContent = `Timer: ${timeLeft} seconds`;
+
+    clearInterval(timer); // Clear any previous timer
+
+    timer = setInterval(() => {
+        timeLeft--;
+        document.getElementById('timer').textContent = `Timer: ${timeLeft} seconds`;
+
+        if (timeLeft <= 0) {
+            clearInterval(timer);
+            recordQuestionTime();  // Record the time even if the user doesn't answer
+            currentQuestionIndex++;
+            if (currentQuestionIndex < questions.length) {
+                loadQuestion();
+                startTimer();
+            } else {
+                endQuiz();
+            }
+        }
+    }, 1000);
+}
+function recordQuestionTime() {
+    const timeSpent = Math.min(10, Math.floor((Date.now() - questionStartTime) / 1000)); 
+    totalTimeTaken += timeSpent;
+}
+
+// function startTimer() {
+//     let timeLeft = 100;
+//     timer = setInterval(() => {
+//         document.getElementById('timer').textContent = 'Timer: ' + timeLeft + ' second';
+//         if (timeLeft <= 0) {
+//             clearInterval(timer);
+//             endQuiz();
+//         }
+//         timeLeft--;
+//         totalTime++;
+//     }, 1000);
+// }
+
+
 // this function for final result page
 function endQuiz() {
     clearInterval(timer);
     showPage('result-page');
-    document.getElementById('qr').getElementsByTagName('span') =`${category}`;
+    document.getElementById('qr').textContent = `Result of ${selectedCategory} Quiz`;
     document.getElementById('result-username').innerHTML = `<b>${userName}</b> Your Result is:`;
-    document.getElementById('total-time').textContent = totalTime;
-    totalTime=0;
+
+    const averageTimePerQuestion = (totalTimeTaken / questions.length).toFixed(2);
+
+    document.getElementById('total-time').innerHTML = `Average Time per Question: <b>${averageTimePerQuestion} seconds</b>`;
     document.getElementById('total-questions').textContent = questions.length;
-    document.getElementById('attempted').textContent = questions.length;
     document.getElementById('correct').textContent = score;
-    document.getElementById('wrong').textContent = questions.length - score;
+    document.getElementById('wrong').textContent = questions.length - score - (notAttemptedQuestions);
     document.getElementById('percentage').textContent = ((score / questions.length) * 100).toFixed(2);
 }
 
