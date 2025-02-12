@@ -176,3 +176,40 @@ button {
     font-size: 18px;
     margin: 5px 0;
 }
+/************************ Animations css ************************/
+button,
+.button-item {
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover,
+.button-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+/************************ Responsive Design Code ************************/
+@media (max-width: 768px) {
+    body {
+        display: block;
+        padding: 10px;
+    }
+
+    #home-page,
+    #quiz-page,
+    #result-page {
+        width: 100%;
+        padding: 10px;
+        box-shadow: none;
+    }
+
+    #options-container {
+        grid-template-columns: 1fr;
+        gap: 5px;
+    }
+
+    button {
+        width: 100%;
+        padding: 10px;
+    }
+}
