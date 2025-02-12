@@ -15,7 +15,7 @@
             <p style="margin-top: -10px;"><b>Enter your name to continue the Quiz.</b></p>
             <input type="text" id="username" placeholder="ENTER YOUR NAME...">
             <!-- <button onclick="startQuiz()">Enter</button> -->
-            <p style="color: #696868; padding-left:60px; padding-right:60px;">You'll have 100 seconds to answer all questions means 10 seconds for each question.</p>
+            <p style="color: #696868; padding-left:60px; padding-right:60px;">You'll have 10 seconds for each question.</p>
             <hr>
         </div>
         <div class="category-section">
@@ -23,7 +23,7 @@
             <button onclick="selectCategory('HTML')">HTML</button>
             <button onclick="selectCategory('CSS')">CSS</button>
             <button onclick="selectCategory('JavaScript')">JAVASCRIPT</button>
-            <button onclick="selectCategory('Data Structures')">DATA STRUCTURE</button>
+            <button onclick="selectCategory('Data Structure')">DATA STRUCTURE</button>
         </div>
         <button onclick="startQuiz()">Enter Quiz</button>
     </div>
@@ -32,7 +32,6 @@
     <div id="quiz-page" class="page">
         <div class="quiz-header">
             <div id="timer">Timer: 100 second</div>
-            <div id="score">Score: 0</div>
         </div>
         <div id="question-container">
             <h2 id="category-title"></h2>
@@ -45,11 +44,10 @@
 
     <!-- Result Page -->
     <div id="result-page" class="page">
-        <h2 style="color: rgb(24, 184, 196)">Quiz Result For <span id="qr"></span></h2>
+        <h2 style="color: rgb(24, 184, 196)" id="qr"></h2>
         <p id="result-username"></p>
-        <p>Total Time Taken: <b><span id="total-time"></span> seconds</b></p>
+        <p><span id="total-time"></span></p>
         <p>Total Questions: <b><span id="total-questions"></span></b></p>
-        <p>Attempted : <b><span id="attempted"></span></b></p>
         <p>Correct : <b><span id="correct"></span></b></p>
         <p>Wrong : <b><span id="wrong"></span></b></p>
         <p>Score : <b><span id="percentage"></span>%</b></p>
