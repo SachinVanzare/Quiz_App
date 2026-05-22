@@ -51,12 +51,12 @@ body {
 }
 
 .category-section>button:hover {
-    background-color: rgb(24, 184, 196);
+    background-color: orange;
     color: white;
 }
 
 .category-section>button:focus {
-    background-color: rgb(24, 184, 196);
+    background-color: orange;
     color: white;
 }
 
